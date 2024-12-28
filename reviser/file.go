@@ -489,7 +489,8 @@ func (f *SourceFile) parseImports(file *ast.File) (map[string]*commentsMetadata,
 		var err error
 		packageImports, err = astutil.LoadPackageDependencies(filepath.Dir(f.filePath), astutil.ParseBuildTag(file))
 		if err != nil {
-			return nil, err
+			fmt.Printf("Warning: Could not load package dependencies: %v\n", err)
+			packageImports = make(map[string]string)
 		}
 	}
 
